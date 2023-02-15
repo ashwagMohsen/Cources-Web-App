@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model List<Cources.Entities.Category>
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using Cources.Data
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="form-group text-right">
+                            <button type="button" id="SaveSelectedUsers" name="SaveSelectedUsers" class="btn btn-outline-info" onclick="save()">Save</button>
+                        </div>
+                    </td>
+                    <td id="catNAme">@category.Title</td>
+                </tr>
+            }}
+        else { }
+    </tbody>
+</table>
+
+<div id="hide" hidden>@{ SignInManager.IsSignedIn(User);
+        }</div>
+
+
+
+
+<script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+    function save() {
+        $.ajax({
+            async: true,
+            method: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            url: '/UserCategory/save',
+            data: { UserName: ("#hide").val(), CourseName: $("#catNAme").val() },
+            success: function (data) {
+
+                alert("Saved done successfuly!!!");
+            },
+            error: function () {
+                console.log("There is a proplem not get the Lecture!!!")
+            }
+
+        });
+    }
+</script>
