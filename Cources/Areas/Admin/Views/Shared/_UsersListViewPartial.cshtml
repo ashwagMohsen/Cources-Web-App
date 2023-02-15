@@ -1,0 +1,29 @@
+﻿@model List< Cources.Areas.Admin.Models.UserModel>
+@using Cources@*.Comparers*@
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="form-group text-right">
+                            <button type="button" id="SaveSelectedUsers" name="SaveSelectedUsers" class="btn btn-outline-info" onclick="save()">Save</button>
+                        </div>
+                    </td>
+                    <td id="FirstName">@user.FirstName</td>
+                    <td id="LastName">@user.LastName</td>
+                </tr>
+            }}
+            else { }
+    </tbody>
+</table>
